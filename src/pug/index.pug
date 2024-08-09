@@ -1,0 +1,82 @@
+doctype html
+html(lang="uk")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        link(rel="stylesheet", href="css/styles.css")
+        title Kanvas Компанія По Продажу Полотна Для Малювання
+    body 
+        include helpers/sprite.pug
+        include helpers/vars.pug
+        include helpers/mixins.pug
+
+        include components/header.pug
+
+        main
+            .cell_popup
+                .cancel(onclick="cell_popup()")
+                    span 
+                    span 
+                
+                form(action="index.php", method="post") 
+                    input(type="text", placeholder="Вкажи свій номер телефона" class="phoneNumber")
+                    p.phoneError 
+                    button(type="button" onclick="phoneCheck()") Замовити
+            .easel_bg
+                .canvas
+                img(src="img/easel.png", alt="")
+            .product_option_bg
+                form(action="index.php", method="post").product_option
+                    .product_size
+                        p.option_title Виберіть розмір
+                        .proposed_size
+                            +radioButton('option', 'size30x30', '30x30', true)
+                            +radioButton('option', 'size30x90', '30x90', false)
+                            +radioButton('option', 'size90x120', '90x120', false)
+                            +radioButton('option', 'size90x150', '90x150', false)
+                            button(onclick="appearanceCustomeSize()" type="button").option_label задати розмір
+                        .custom_size
+                            .width 
+                                label
+                                    p ширина
+                                    input(type="text", id="width")
+                            span x
+                            .height
+                                label
+                                    p висота
+                                    input(type="text", id="height")
+                                    
+                            button(onclick="calculateDimensions()" type="button") підрахувати  
+                    hr
+                    .additional_options
+                        p.option_title Додаткові опції
+                        .table
+                            .tr
+                                .check
+                                    input(type="checkbox" id="moreExpensiveCanvas")
+                                    label(for="moreExpensiveCanvas") дорожче полтно
+                                .price
+                                    p + 35 грн
+                            .tr
+                                .check
+                                    input(type="checkbox" id="withFrame")
+                                    label(for="withFrame") з рамкою
+                                .price
+                                    p + 10 грн
+                            .tr
+                                .check
+                                    input(type="checkbox" id="newPost")
+                                    label(for="newPost") з доставкою (Нова Пошта)
+                                .price
+                                    p + 40 грн
+                    hr
+                    .theTotalAmount
+                        button(type="submit") Придбати
+                        p.total_price_p Загальна сума: <span><b class="total_price">90</b> грн</span>
+
+
+        include components/footer.pug
